@@ -23,11 +23,20 @@ void rotate(vector<vector<int>> &matrix){
         //You need this for loop to account for the shifts in each of the layers
         for(int i=first; i<last; ++i){
             int offset = i-first;
+            
+            //Save the top left element
             int top = matrix[first][i];
             
+            //set the top left element equal to the bottom left element of the layer
             matrix[first][i] = matrix[last-offset][first];
+            
+            //bottom left = bottom right
             matrix[last-offset][first] = matrix[last][last-offset];
+            
+            //bottom right = top right
             matrix[last][last-offset] = matrix[first+offset][last];
+            
+            //top right = the top left element we saved on line 28
             matrix[first+offset][last] = top;
         }
     }
